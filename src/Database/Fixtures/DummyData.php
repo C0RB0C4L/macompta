@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Database\DBO;
+namespace App\Database\Fixtures;
 
 use App\Repository\DossierRepository;
 use App\Repository\EcritureRepository;

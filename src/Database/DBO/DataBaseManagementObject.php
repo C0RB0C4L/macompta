@@ -3,6 +3,7 @@
 namespace App\Database\DBO;
 
 use App\Database\DBAL\DataBaseAccessObject;
+use App\Database\Fixtures\DummyData;
 use App\Repository\DossierRepository;
 use App\Repository\EcritureRepository;
 
