@@ -13,3 +13,7 @@
     - $ php bin/console app:database:create (app:database:delete existe aussi)
     - $ php bin/console app:schema:create
     - $ php bin/console app:fixtures:load
+
+## Exercice 2
+- Création de la page liste d'écritures d'un dossier, selon son uuid. Une donnée fantoche est utilisée pour le moment.
+- Un peu d'avance a été pris sur l'exercice 8 (page d'accueil = liste des dossiers). Il sera complété en temps venu.

@@ -1,0 +1,21 @@
+{% for type, messages in app.flashes %}
+	{% for message in messages %}
+		<div class="alert alert-{{type}}">
+			<span class="me-3">
+				{% if type == constant("\\App\\Service\\FlashService::TYPE_SUCCESS") %}
+					<i class="bi bi-check-circle me-3"></i>
+    
+				{% elseif type == constant("\\App\\Service\\FlashService::TYPE_WARNING") %}
+					<i class="bi bi-exclamation-triangle me-3"></i>
+
+				{% elseif type == constant("\\App\\Service\\FlashService::TYPE_ERROR") %}
+					<i class="bi bi-x-circle me-3"></i>
+
+				{% else %}
+					<i class="bi bi-info-circle me-3"></i>
+				{% endif %}
+			</span>
+			{{ message|raw }}
+		</div>
+	{% endfor %}
+{% endfor %}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block tabtitle %}
+	Dossier 123
+{% endblock %}
+
+{% block content %}
+
+	<div class="row row-cols-1 align-items-start gy-4">
+
+		<div class="col">
+			<a href="{{path('app_home')}}" class="btn btn-primary">Retour</a>
+		</div>
+
+		<div class="col">
+			{% include 'dossier/_partials/ecritures_list.html.twig' %}
+		</div>
+
+	</div>
+
+{% endblock %}

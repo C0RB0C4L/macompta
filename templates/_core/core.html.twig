@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" href="{{asset("favicon.ico")}}">
+
+		<title>
+			{% block tabtitle %}
+				{# TO BE HANDLED IN TEMPLATES #}
+			{% endblock %}
+		</title>
+		{% include "_core/stylesheet.html.twig" %}
+
+		{% block stylesheet %}
+			{# TO BE HANDLED IN TEMPLATES #}
+		{% endblock %}
+	</head>
+
+	<body class="bg-black bg-opacity-100 pt-5">
+
+		{% block body %}
+			{# TO BE HANDLED IN TEMPLATES #}
+		{% endblock %}
+
+		{% include "_core/javascript.html.twig" %}
+
+		{% block javascript %}
+			{# TO BE HANDLED IN TEMPLATES #}
+		{% endblock %}
+
+	</body>
+
+</html>
