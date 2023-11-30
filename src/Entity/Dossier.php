@@ -29,6 +29,13 @@ class Dossier
         return $this->uuid;
     }
 
+    public function setUuid(?string $uuid): self
+    {
+        $this->uuid = $uuid;
+
+        return $this;
+    }
+
     public function getName(): ?string
     {
         return $this->name;
@@ -68,4 +75,3 @@ class Dossier
         return $this;
     }
 }
- 

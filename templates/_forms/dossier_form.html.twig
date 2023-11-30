@@ -1,0 +1,16 @@
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{{form_start(form)}}
+
+{{form_row(form.name, {'label':"Nom du dossier"})}}
+
+{{form_row(form.login, {'label':"Login d'accès"})}}
+
+{{form_row(form.password, {'label':"Mot de passe", "help": "Pour les besoin de l'exercice, seul 1 caractère peut suffire."})}}
+
+<div class="d-flex justify-content-between">
+	<button class="btn btn-info" type="submit" formaction="{{path('app_dossier_create')}}">
+		Créer le dossier
+	</button>
+</div>
+
+{{form_end(form)}}

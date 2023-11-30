@@ -16,4 +16,8 @@
 
 ## Exercice 2
 - Création de la page liste d'écritures d'un dossier, selon son uuid. Une donnée fantoche est utilisée pour le moment.
-- Un peu d'avance a été pris sur l'exercice 8 (page d'accueil = liste des dossiers). Il sera complété en temps venu.
+- Un peu d'avance a été prise sur l'exercice 8 (page d'accueil = liste des dossiers). Il sera complété en temps venu.
+
+## Exercice 3
+- Bien que non prévu pour l'exercice, une liberté à été prise et il est ainsi possible de créer des dossiers avant de créer une écriture dans celui-ci.
+- 
