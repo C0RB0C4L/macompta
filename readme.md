@@ -20,4 +20,8 @@
 
 ## Exercice 3
 - Bien que non prévu pour l'exercice, une liberté à été prise et il est ainsi possible de créer des dossiers avant de créer une écriture dans celui-ci.
-- 
+
+## Exercice 4 
+- Interversion des données en page d'accueil, elle affiche maintenant la liste globale des écritures comptables.
+- Un lien d'accès vers le dossier associé à l'écriture a été ajouté pour pouvoir réaccéder à celui-ci et ainsi y ajouter une nouvelle écriture. L'affichage sera modifié plus tard pour que l'intitulé du dossier apparaisse plutôt que son uuid.
+- La liste des écritures affairantes à ce dossier a été ajoutée par la même occasion.

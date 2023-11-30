@@ -65,18 +65,18 @@ class DossierController extends AbstractController
     #[Route('/{uuid}', name: 'detail')]
     public function details(string $uuid, DossierRepository $repo): Response
     {
-        // @todo 
-        // $ecritures = $repo->selectEcrituresFromDossier($uuid):
-        /*
-        if ($ecritures !== null) {
-            $this->addFlash(FlashService::TYPE_WARNING, "Le dossier voulu n'existe pas.");
+        if(!$repo->selectOneDossier($uuid)) {
+            $this->addFlash(FlashService::TYPE_WARNING, "Le dossier recherché n'existe pas.");
             
             return $this->redirectToRoute("app_home");
+
+        } else {
+            $ecritures = $repo->selectEcrituresFromDossier($uuid);
         }
-        */
 
         return $this->render("dossier/detail.html.twig", [
-            "dossier_uuid" => $uuid
+            "dossier_uuid" => $uuid,
+            "ecritures" => $ecritures
         ]);
     }
 

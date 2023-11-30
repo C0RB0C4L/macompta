@@ -74,4 +74,19 @@ class DossierRepository extends AbstractRepository
 
         return null;
     }
+
+    public function selectEcrituresFromDossier(string $uuid)
+    {
+        if (!empty($uuid)) {
+            $result = $this->executeSelect(
+                EcritureRepository::TABLE_NAME,
+                [EcritureRepository::FOREIGN_DOSSIER => $uuid],
+                false
+            );
+
+            return $result;
+        }
+
+        return null;
+    }
 }

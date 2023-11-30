@@ -26,16 +26,18 @@ abstract class AbstractRepository extends DataBaseAccessObject
                 . "$preparedValues"
                 . " WHERE " . array_key_first($where) . " = :" . array_key_first($where);
         }
-        dump($data);
 
         return $this->executePrepared($sql, $data);
     }
 
     public function executeSelect(string $table, array $where, bool $findOne)
     {
-        $preparedValues = $this->getUpdatePreparedValues($where);
+        $sql = "SELECT * FROM $table";
 
-        $sql = "SELECT * FROM $table WHERE $preparedValues";
+        if($where !== []) {
+            $preparedValues = $this->getUpdatePreparedValues($where);
+            $sql .= " WHERE $preparedValues";
+        }
 
         return $this->executePreparedSelect($sql, $where, $findOne);
     }

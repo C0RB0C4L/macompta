@@ -66,4 +66,14 @@ class EcritureRepository extends AbstractRepository
 
         return false;
     }
+
+    public function selectAllEcritures()
+    {
+        $result = $this->executeSelect(
+            EcritureRepository::TABLE_NAME,
+            [],
+            false
+        );
+        return $result;
+    }
 }
