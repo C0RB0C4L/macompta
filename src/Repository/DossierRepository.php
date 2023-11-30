@@ -59,4 +59,19 @@ class DossierRepository extends AbstractRepository
 
         return false;
     }
+
+    public function selectOneDossier(string $uuid)
+    {
+        if (!empty($uuid)) {
+            $result = $this->executeSelect(
+                self::TABLE_NAME,
+                [self::PRIMARY_KEY => $uuid],
+                true
+            );
+
+            return $result;
+        }
+
+        return null;
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Database\DBO;
 
 use App\Database\DBAL\DataBaseAccessObject;
+use PDO;
 
 abstract class AbstractRepository extends DataBaseAccessObject
 {
@@ -28,6 +29,15 @@ abstract class AbstractRepository extends DataBaseAccessObject
         dump($data);
 
         return $this->executePrepared($sql, $data);
+    }
+
+    public function executeSelect(string $table, array $where, bool $findOne)
+    {
+        $preparedValues = $this->getUpdatePreparedValues($where);
+
+        $sql = "SELECT * FROM $table WHERE $preparedValues";
+
+        return $this->executePreparedSelect($sql, $where, $findOne);
     }
 
     private function getOrdainedColumns(array $array)
@@ -78,6 +88,39 @@ abstract class AbstractRepository extends DataBaseAccessObject
                     $execute = $statement->execute($data);
 
                     return $execute;
+                } catch (\Throwable $th) {
+                    return false;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private function executePreparedSelect($sql, array $data, $findOne)
+    {
+        $pdo = $this->getPdo($this->getDbName());
+
+        if ($pdo instanceof \PDO) {
+            $statement = $pdo->prepare($sql);
+            if ($statement !== false) {
+
+                try {
+
+                    $execute = $statement->execute($data);
+
+                    if ($execute) {
+
+                        if ($findOne) {
+                            $result = $statement->fetchAll(PDO::FETCH_ASSOC)[0];
+                        } else {
+                            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                        }
+
+                        return $result;
+                    }
+
+                    return [];
                 } catch (\Throwable $th) {
                     return false;
                 }

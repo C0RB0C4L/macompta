@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
     // profile - my account
     ajaxFormSubmission("form[name='dossier_form']", "#modalDossier .modal-body");
+    ajaxFormSubmission("form[name='ecriture_form']", "#modalEcriture .modal-body");
 })
 
 /**
