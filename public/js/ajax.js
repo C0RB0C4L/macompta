@@ -1,15 +1,5 @@
 "use strict"
 
-document.addEventListener('DOMContentLoaded', function (event) {
-
-    // profile - my account
-    ajaxFormSubmission("form[name='dossier_form']", "#modalDossier .modal-body");
-    ajaxFormSubmission("form[name='ecriture_form']", "#modalEcriture .modal-body");
-    
-    
-    ajaxFormFetchAndSubmission("button[data-bs-target='#modalEditEcriture']", "#modalEditEcriture .modal-body");
-})
-
 /**
      * @description Handles all the submission / reload (for errors) process inside ajax form.
      * 
@@ -68,7 +58,7 @@ function ajaxFormFetchAndSubmission(fetcherSelector, containerSelector) {
     if (fetchers.length !== 0 && container !== null) {
 
         for (let fetcher of fetchers) {
-            
+
             fetcher.addEventListener("click", function (e) {
                 e.preventDefault();
 
@@ -85,7 +75,6 @@ function ajaxFormFetchAndSubmission(fetcherSelector, containerSelector) {
 
                         if (response.status !== undefined && response.status === 0) {
                             let DOMResponse = new DOMParser().parseFromString(response.body, "text/html");
-                            console.log(DOMResponse);
                             let form = DOMResponse.querySelector("form");
                             ajaxFetchSpinner(containerSelector, false);
                             container.innerHTML = "";

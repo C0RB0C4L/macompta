@@ -28,3 +28,7 @@
 
 ## Exerice 5
 - Une fenêtre modale a été créée plutôt qu'une page pour la création et l'édition d'une écriture. Le formulaire est géré de manière asynchrone
+
+## Exerice 7
+- Utilisation de la librairie datatable pour ordonner les colonnes. JQuery requis. CDN utilisé pour récupérer ces dépendances.
+- Fix sur le mode d'utilisation de CDN et retrait de librairie inutile
