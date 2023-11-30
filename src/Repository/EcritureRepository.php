@@ -16,6 +16,8 @@ class EcritureRepository extends AbstractRepository
     public const COLUMN_DATE = "date";
     public const COLUMN_TYPE = "type";
     public const COLUMN_AMOUNT = "amount";
+    public const COLUMN_CREATED_AT = "created_at";
+    public const COLUMN_UPDATED_AT = "updated_at";
 
     public const SQL_TABLE_CREATION = "CREATE TABLE IF NOT EXISTS " . self::TABLE_NAME . " (
         `" . self::PRIMARY_KEY . "` VARCHAR(36) PRIMARY KEY,
@@ -28,6 +30,9 @@ class EcritureRepository extends AbstractRepository
         `updated_at` timestamp NULL
     );";
 
+    /**
+     * @return Ecriture|false
+     */
     public function createOrUpdate(Ecriture $ecriture)
     {
         if ($ecriture->getUuid() !== null) {
@@ -67,6 +72,9 @@ class EcritureRepository extends AbstractRepository
         return false;
     }
 
+    /**
+     * @return array
+     */
     public function selectAllEcritures()
     {
         $result = $this->executeSelect(
@@ -75,5 +83,33 @@ class EcritureRepository extends AbstractRepository
             false
         );
         return $result;
+    }
+
+    /**
+     * @return Ecriture|null
+     */
+    public function selectOneEcriture(string $uuid)
+    {
+        if (!empty($uuid)) {
+            $result = $this->executeSelect(
+                self::TABLE_NAME,
+                [self::PRIMARY_KEY => $uuid],
+                true
+            );
+
+            $ecriture = new Ecriture();
+            $ecriture->setUuid($result[self::PRIMARY_KEY]);
+            $ecriture->setDossierUuid($result[self::FOREIGN_DOSSIER]);
+            $ecriture->setLabel($result[self::COLUMN_LABEL]);
+            $ecriture->setDate($result[self::COLUMN_DATE]);
+            $ecriture->setType($result[self::COLUMN_TYPE]);
+            $ecriture->setAmount($result[self::COLUMN_AMOUNT]);
+            $ecriture->setCreatedAt(new \DateTimeImmutable($result[self::COLUMN_CREATED_AT]));
+            $ecriture->setUPdatedAt($result[self::COLUMN_UPDATED_AT]);
+
+            return $ecriture;
+        }
+
+        return null;
     }
 }

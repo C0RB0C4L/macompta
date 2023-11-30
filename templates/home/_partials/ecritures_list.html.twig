@@ -28,9 +28,9 @@
 						<td>{{ecriture.type}}</td>
 						<td>{{ecriture.amount}}</td>
 						<td>
-							<a class="text-decoration-none btn btn-info py-1 px-2" href="{{path('app_home')}}" title="Editer">
+							<button class="btn btn-info btn-sm" data-form-fetch="{{path('app_ecriture_edit_ajax', {uuid:ecriture.uuid})}}" title="Editer" data-bs-target="#modalEditEcriture" data-bs-toggle="modal">
 								<i class="bi bi-pencil"></i>
-							</a>
+							</button>
 							<a class="text-decoration-none btn btn-danger py-1 px-2" href="{{path('app_home')}}" title="Editer">
 								<i class="bi bi-trash"></i>
 							</a>
@@ -43,3 +43,5 @@
 
 	</div>
 </div>
+
+{% include '_partials/ecriture_edit_modal.html.twig' %}

@@ -2,7 +2,7 @@
 
 	<div class="card-header d-flex justify-content-between py-3">
 		<h5 class="my-0 align-middle">
-			Liste des écritures dans le dossier en cours
+			Liste des écritures dans le dossier {{dossier.name}}
 		</h5>
 		<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEcriture">Nouveau</button>
 		{% include 'dossier/_partials/ecriture_new_modal.html.twig' %}
@@ -11,7 +11,7 @@
 
 		<table class="table table-responsive table-sm js-table text-white">
 			<thead>
-				<th>Uuid</th>
+				{# <th>Uuid</th> #}
 				<th>Label</th>
 				<th>Date de l'écriture</th>
 				<th>Type</th>
@@ -21,17 +21,17 @@
 			<tbody>
 				{% for ecriture in ecritures %}
 					<tr>
-						<th>{{ecriture.label}}</th>
-						<td>
-							{{ecriture.dossier_uuid}}
-						</td>
+						{# <th>{{ecriture.uuid}}</th> #}
+						<th>
+							{{ecriture.label}}
+						</th>
 						<td>{{ecriture.date}}</td>
 						<td>{{ecriture.type}}</td>
 						<td>{{ecriture.amount}}</td>
 						<td>
-							<a class="text-decoration-none btn btn-info py-1 px-2" href="{{path('app_home')}}" title="Editer">
+							<button class="btn btn-info btn-sm" data-form-fetch="{{path('app_ecriture_edit_ajax', {uuid:ecriture.uuid})}}" title="Editer" data-bs-target="#modalEditEcriture" data-bs-toggle="modal">
 								<i class="bi bi-pencil"></i>
-							</a>
+							</button>
 							<a class="text-decoration-none btn btn-danger py-1 px-2" href="{{path('app_home')}}" title="Editer">
 								<i class="bi bi-trash"></i>
 							</a>
@@ -44,3 +44,5 @@
 
 	</div>
 </div>
+
+{% include '_partials/ecriture_edit_modal.html.twig' %}

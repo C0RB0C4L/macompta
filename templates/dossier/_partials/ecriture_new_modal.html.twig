@@ -1,12 +1,12 @@
 <div class="modal fade" id="modalEcriture" data-bs-backdrop="static" tabindex="-1" role="dialog">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content bg-dark">
+		<div class="modal-content bg-dark text-white">
 			<div class="modal-header">
 				<h5 class="modal-title">Créer une nouvelle écriture</h5>
 				<button class="btn-close btn-close-light" type="button" data-bs-dismiss="modal"></button>
 			</div>
 			<div class="modal-body">
-				{{ render(controller("App\\Controller\\DossierController::ecritureCreate", { uuid:dossier_uuid })) }}
+				{{ render(controller("App\\Controller\\DossierController::ecritureCreate", { uuid:dossier.uuid })) }}
 			</div>
 		</div>
 	</div>

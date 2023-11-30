@@ -41,7 +41,7 @@ class DossierController extends AbstractController
                 }
             }
 
-            $responseBody = $this->renderForm('_forms/dossier_form.html.twig', [
+            $responseBody = $this->renderForm('_forms/dossier_create_form.html.twig', [
                 'form' => $form
             ]);
 
@@ -52,7 +52,7 @@ class DossierController extends AbstractController
             // sert le formulaire à remplir seulement si demandé par un appel controller
             if ($stack->getParentRequest() !== null) {
 
-                return $this->renderForm('_forms/dossier_form.html.twig', [
+                return $this->renderForm('_forms/dossier_create_form.html.twig', [
                     "form" => $form
                 ]);
             }
@@ -65,7 +65,8 @@ class DossierController extends AbstractController
     #[Route('/{uuid}', name: 'detail')]
     public function details(string $uuid, DossierRepository $repo): Response
     {
-        if(!$repo->selectOneDossier($uuid)) {
+        $dossier = $repo->selectOneDossier($uuid);
+        if($dossier === null) {
             $this->addFlash(FlashService::TYPE_WARNING, "Le dossier recherché n'existe pas.");
             
             return $this->redirectToRoute("app_home");
@@ -75,7 +76,7 @@ class DossierController extends AbstractController
         }
 
         return $this->render("dossier/detail.html.twig", [
-            "dossier_uuid" => $uuid,
+            "dossier" => $dossier,
             "ecritures" => $ecritures
         ]);
     }
@@ -114,7 +115,7 @@ class DossierController extends AbstractController
                 }
             }
 
-            $responseBody = $this->renderForm('_forms/ecriture_form.html.twig', [
+            $responseBody = $this->renderForm('_forms/ecriture_create_form.html.twig', [
                 'form' => $form,
                 "dossier_uuid" => $uuid
             ]);
@@ -126,7 +127,7 @@ class DossierController extends AbstractController
             // sert le formulaire à remplir seulement si demandé par un appel controller
             if ($stack->getParentRequest() !== null) {
 
-                return $this->renderForm('_forms/ecriture_form.html.twig', [
+                return $this->renderForm('_forms/ecriture_create_form.html.twig', [
                     "form" => $form,
                     "dossier_uuid" => $uuid
                 ]);

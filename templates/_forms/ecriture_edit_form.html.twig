@@ -1,21 +1,19 @@
 {% form_theme form 'bootstrap_5_layout.html.twig' %}
-{{form_start(form)}}
+{{form_start(form, {'attr':{'id':'ecriture_edit_ajax'}})}}
 
 {{form_row(form.label, {'label':"Intitulé de l'écriture", "help":"Entre 1 et 255 caractères"})}}
-
-{{form_row(form.type, {'label':"Type d'opération"})}}
 
 {{form_row(form.amount, {'label':"Montant", "help":"Doit être strictement positif"})}}
 
 {{form_row(form.date, {'label':"Date de l'écriture"})}}
 
 <div class="d-flex justify-content-between">
-	<button class="btn btn-info" type="submit" formaction="{{path('app_dossier_ecriture_create', { uuid:dossier_uuid }) }}">
+	<button class="btn btn-info" type="submit" formaction="{{path('app_ecriture_edit_ajax', { uuid:form.vars.value.uuid }) }}">
 		Enregistrer
 	</button>
 
-	<button class="btn btn-info" data-bs-dismiss="modal">
-		Retour
+	<button class="btn btn-info" type="button" data-bs-dismiss="modal">
+		Annuler
 	</button>
 </div>
 

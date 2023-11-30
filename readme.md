@@ -25,3 +25,6 @@
 - Interversion des données en page d'accueil, elle affiche maintenant la liste globale des écritures comptables.
 - Un lien d'accès vers le dossier associé à l'écriture a été ajouté pour pouvoir réaccéder à celui-ci et ainsi y ajouter une nouvelle écriture. L'affichage sera modifié plus tard pour que l'intitulé du dossier apparaisse plutôt que son uuid.
 - La liste des écritures affairantes à ce dossier a été ajoutée par la même occasion.
+
+## Exerice 5
+- Une fenêtre modale a été créée plutôt qu'une page pour la création et l'édition d'une écriture. Le formulaire est géré de manière asynchrone

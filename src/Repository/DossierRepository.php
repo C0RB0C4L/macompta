@@ -15,6 +15,7 @@ class DossierRepository extends AbstractRepository
     public const COLUMN_NAME = "name";
     public const COLUMN_LOGIN = "login";
     public const COLUMN_PASSWORD = "password";
+    public const COLUMN_CREATED_AT = "created_at";
     public const COLUMN_UPDATED_AT = "updated_at";
 
     public const SQL_TABLE_CREATION = "CREATE TABLE IF NOT EXISTS " . self::TABLE_NAME . " (
@@ -26,6 +27,9 @@ class DossierRepository extends AbstractRepository
         `updated_at` timestamp NULL
     ); ";
 
+    /**
+     * @return Dossier|false
+     */
     public function createOrUpdate(Dossier $dossier)
     {
         if ($dossier->getUuid() !== null) {
@@ -60,6 +64,9 @@ class DossierRepository extends AbstractRepository
         return false;
     }
 
+    /**
+     * @return Dossier|null
+     */
     public function selectOneDossier(string $uuid)
     {
         if (!empty($uuid)) {
@@ -69,12 +76,24 @@ class DossierRepository extends AbstractRepository
                 true
             );
 
-            return $result;
+            $dossier = new Dossier();
+            $dossier->setUuid($result[self::PRIMARY_KEY]);
+            $dossier->setName($result[self::COLUMN_NAME]);
+            $dossier->setLogin($result[self::COLUMN_LOGIN]);
+            $dossier->setPassword($result[self::COLUMN_PASSWORD]);
+            $dossier->setUuid($result[self::PRIMARY_KEY]);
+            $dossier->setCreatedAt(new \DateTimeImmutable($result[self::COLUMN_CREATED_AT]));
+            $dossier->setUPdatedAt($result[self::COLUMN_UPDATED_AT]);
+
+            return $dossier;
         }
 
         return null;
     }
 
+    /**
+     * @return array|null
+     */
     public function selectEcrituresFromDossier(string $uuid)
     {
         if (!empty($uuid)) {

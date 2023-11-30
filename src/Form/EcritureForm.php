@@ -29,22 +29,25 @@ class EcritureForm extends AbstractType
                         "max" => 255
                     ]),
                 ]
-            ])
-            ->add('type', ChoiceType::class, [
+            ]);
+        if (!$options["edit"]) {
+            $builder->add('type', ChoiceType::class, [
                 "expanded" => false,
                 "multiple" => false,
                 "choices" => array_keys(Ecriture::TYPE),
                 "choice_label" => function ($choice, $key, $value) {
                     return Ecriture::TYPE[$choice];
                 }
-            ])
+            ]);
+        }
 
-            ->add('amount', NumberType::class, [
-                "scale" => 2,
-                "constraints" => [
-                    new Positive()
-                ]
-            ])
+
+        $builder->add('amount', NumberType::class, [
+            "scale" => 2,
+            "constraints" => [
+                new Positive()
+            ]
+        ])
 
             ->add('date', DateType::class, [
                 'format' => 'dd-MM-yyyy',
@@ -52,8 +55,8 @@ class EcritureForm extends AbstractType
                 "input" => "string",
                 "years" => [
                     (int)date("Y"),
-                    (int)date("Y")-1,
-                    (int)date("Y")-2
+                    (int)date("Y") - 1,
+                    (int)date("Y") - 2
                 ],
                 "constraints" => [
                     new LessThan('today')
@@ -65,6 +68,7 @@ class EcritureForm extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Ecriture::class,
+            "edit" => false
         ]);
     }
 }
