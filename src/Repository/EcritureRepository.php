@@ -112,4 +112,17 @@ class EcritureRepository extends AbstractRepository
 
         return null;
     }
+
+    /**
+     * @return bool
+     */
+    public function deleteEcriture(string $uuid)
+    {
+        $result = $this->executeDelete(
+            self::TABLE_NAME,
+            [self::PRIMARY_KEY => $uuid]
+        );
+
+        return $result;
+    }
 }

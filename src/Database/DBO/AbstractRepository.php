@@ -34,12 +34,24 @@ abstract class AbstractRepository extends DataBaseAccessObject
     {
         $sql = "SELECT * FROM $table";
 
-        if($where !== []) {
+        if ($where !== []) {
             $preparedValues = $this->getUpdatePreparedValues($where);
             $sql .= " WHERE $preparedValues";
         }
 
         return $this->executePreparedSelect($sql, $where, $findOne);
+    }
+
+    public function executeDelete(string $table, array $where)
+    {
+        $sql = "DELETE FROM $table";
+
+        if ($where !== []) {
+            $preparedValues = $this->getUpdatePreparedValues($where);
+            $sql .= " WHERE $preparedValues";
+        }
+
+        return $this->executePrepared($sql, $where);
     }
 
     private function getOrdainedColumns(array $array)

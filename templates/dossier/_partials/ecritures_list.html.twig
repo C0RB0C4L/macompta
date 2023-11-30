@@ -2,7 +2,8 @@
 
 	<div class="card-header d-flex justify-content-between py-3">
 		<h5 class="my-0 align-middle">
-			Liste des écritures dans le dossier {{dossier.name}}
+			Liste des écritures dans le dossier
+			{{dossier.name}}
 		</h5>
 		<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEcriture">Nouveau</button>
 		{% include 'dossier/_partials/ecriture_new_modal.html.twig' %}
@@ -32,7 +33,7 @@
 							<button class="btn btn-info btn-sm" data-form-fetch="{{path('app_ecriture_edit_ajax', {uuid:ecriture.uuid})}}" title="Editer" data-bs-target="#modalEditEcriture" data-bs-toggle="modal">
 								<i class="bi bi-pencil"></i>
 							</button>
-							<a class="text-decoration-none btn btn-danger py-1 px-2" href="{{path('app_home')}}" title="Editer">
+							<a class="text-decoration-none btn btn-danger py-1 px-2" href="{{path('app_ecriture_delete', {uuid:ecriture.uuid})}}" title="Supprimer">
 								<i class="bi bi-trash"></i>
 							</a>
 						</td>

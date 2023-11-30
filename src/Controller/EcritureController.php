@@ -51,4 +51,18 @@ class EcritureController extends AbstractController
 
         return $this->redirectToRoute("app_home");
     }
+
+    #[Route('/{uuid}/delete', name: 'delete')]
+    public function delete(string $uuid, EcritureRepository $repo): Response
+    {
+        $delete = $repo->deleteEcriture($uuid);
+
+        if ($delete) {
+            $this->addFlash(FlashService::TYPE_SUCCESS, "L'écriture a bien été supprimée.");
+        } else {
+            $this->addFlash(FlashService::TYPE_ERROR, "L'écriture n'a pas pu être supprimée.");
+        }
+
+        return $this->redirectToRoute("app_home");
+    }
 }

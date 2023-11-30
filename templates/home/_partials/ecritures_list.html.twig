@@ -31,7 +31,7 @@
 							<button class="btn btn-info btn-sm" data-form-fetch="{{path('app_ecriture_edit_ajax', {uuid:ecriture.uuid})}}" title="Editer" data-bs-target="#modalEditEcriture" data-bs-toggle="modal">
 								<i class="bi bi-pencil"></i>
 							</button>
-							<a class="text-decoration-none btn btn-danger py-1 px-2" href="{{path('app_home')}}" title="Editer">
+							<a class="text-decoration-none btn btn-danger py-1 px-2" href="{{path('app_ecriture_delete', {uuid:ecriture.uuid})}}" title="Supprimer">
 								<i class="bi bi-trash"></i>
 							</a>
 						</td>

@@ -58,7 +58,7 @@ class DummyData
                 $label = "label_" . (string)rand(0, 999);
                 $date = date("Y-m-d");
                 $type = (rand(1, 100) > 50 ? "C" : "D");
-                $amount = ($type == "C" ? rand(1, 10000) : rand(-10000, -1));
+                $amount = rand(1, 10000);
                 $createdAt = "now()";
 
                 $sql .= "("
