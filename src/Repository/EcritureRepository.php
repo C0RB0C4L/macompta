@@ -22,12 +22,12 @@ class EcritureRepository extends AbstractRepository
     public const SQL_TABLE_CREATION = "CREATE TABLE IF NOT EXISTS " . self::TABLE_NAME . " (
         `" . self::PRIMARY_KEY . "` VARCHAR(36) PRIMARY KEY,
         `" . self::FOREIGN_DOSSIER . "` VARCHAR(36) NOT NULL,
-        `label` VARCHAR(255) NOT NULL DEFAULT '',
-        `date` date NOT NULL DEFAULT '0000-00-00',
-        `type` enum('C', 'D') NOT NULL,
-        `amount` DOUBLE(14,2) NOT NULL DEFAULT 0.00,
-        `created_at` timestamp NULL DEFAULT current_timestamp(),
-        `updated_at` timestamp NULL
+        `" . self::COLUMN_LABEL . "` VARCHAR(255) NOT NULL DEFAULT '',
+        `" . self::COLUMN_DATE . "` date NOT NULL DEFAULT '0000-00-00',
+        `" . self::COLUMN_TYPE . "` enum('C', 'D') NOT NULL,
+        `" . self::COLUMN_AMOUNT . "` DOUBLE(14,2) NOT NULL DEFAULT 0.00,
+        `" . self::COLUMN_CREATED_AT . "` timestamp NULL DEFAULT current_timestamp(),
+        `" . self::COLUMN_UPDATED_AT . "` timestamp NULL
     );";
 
     /**
@@ -78,7 +78,7 @@ class EcritureRepository extends AbstractRepository
     public function selectAllEcritures()
     {
         $result = $this->executeSelect(
-            EcritureRepository::TABLE_NAME,
+            self::TABLE_NAME,
             [],
             false
         );

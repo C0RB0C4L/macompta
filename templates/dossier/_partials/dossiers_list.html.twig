@@ -4,28 +4,40 @@
 		<h5 class="my-0 align-middle">
 			Liste des dossiers
 		</h5>
-		<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDossier">Nouveau</button>
-		{% include 'home/_partials/dossier_new_modal.html.twig' %}
+		<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDossier">Nouveau dossier</button>
+		{% include 'dossier/_partials/dossier_new_modal.html.twig' %}
 	</div>
 
 	<div class="card-body d-flex flex-column justify-content-between">
 
-		<table class="table table-responsive table-sm js-table text-white">
+		<table class="table table-responsive table-sm text-white">
 			<thead>
 				<th>Nom</th>
 				<th>Uuid</th>
-				<th>Création</th>
-				<th>Dernière modification</th>
+				<th>Login</th>
+				<th>Nombre d'opérations</th>
+				<th>Crédit</th>
+				<th>Débit</th>
+				<th>Solde</th>
+				<th>Date de création</th>
 			</thead>
 			<tbody>
-			
-				<tr>
-					<th><a href="{{path('app_dossier_detail', {uuid:'22a36f47-086f-4017-b1ed-44063c06a9a9'})}}">nom_123</a></th>
-					<td>22a36f47-086f-4017-b1ed-44063c06a9a9</td>
-					<td>{# {{dossier.createdAt|format_datetime(locale='fr', pattern="YYYY MM dd")}} #}</td>
-					<td>{# {{dossier.modifiedAt|format_datetime(locale='fr', pattern="YYYY MM dd")}} #}</td>
-				</tr>
-
+				{% for dossier in dossiers %}
+					<tr>
+						<th>
+							<a href="{{path("app_dossier_detail", {uuid:dossier.uuid})}}">{{dossier.name}}</a>
+						</th>
+						<td>{{dossier.uuid}}</td>
+						<td>{{dossier.login}}</td>
+						<td>{{dossier.quantity}}</td>
+						<td>{{dossier.credit}}</td>
+						<td>{{dossier.debit}}</td>
+						<td>{{dossier.balance}}</td>
+						<td>
+							{{dossier.created_at|date("Y-m-d")}}
+						</td>
+					</tr>
+				{% endfor %}
 			</tbody>
 		</table>
 

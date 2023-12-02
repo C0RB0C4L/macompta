@@ -32,3 +32,6 @@
 ## Exerice 7
 - Utilisation de la librairie datatable pour ordonner les colonnes. JQuery requis. CDN utilisé pour récupérer ces dépendances.
 - Fix sur le mode d'utilisation de CDN et retrait de librairie inutile
+
+## Exerice 8
+- Bien que non demandé, ajout des valeurs de crédit et de débit en plus du solde du dossier sur la page de liste de ceux-ci.

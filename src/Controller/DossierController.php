@@ -17,6 +17,16 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/dossier', name: 'app_dossier_')]
 class DossierController extends AbstractController
 {
+    #[Route('', name: 'index')]
+    public function index(DossierRepository $repo): Response
+    {
+        $dossier = $repo->selectAllDossierWithBalance();
+
+        return $this->render("dossier/index.html.twig", [
+            "dossiers" => $dossier
+        ]);
+    }
+
     #[Route('/create', name: 'create')]
     public function create(Request $request, RequestStack $stack, DossierRepository $repo): Response
     {
@@ -66,11 +76,10 @@ class DossierController extends AbstractController
     public function details(string $uuid, DossierRepository $repo): Response
     {
         $dossier = $repo->selectOneDossier($uuid);
-        if($dossier === null) {
+        if ($dossier === null) {
             $this->addFlash(FlashService::TYPE_WARNING, "Le dossier recherché n'existe pas.");
-            
-            return $this->redirectToRoute("app_home");
 
+            return $this->redirectToRoute("app_dossier_index");
         } else {
             $ecritures = $repo->selectEcrituresFromDossier($uuid);
         }

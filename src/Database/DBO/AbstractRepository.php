@@ -9,6 +9,9 @@ abstract class AbstractRepository extends DataBaseAccessObject
 {
     protected $customPdo;
 
+    /**
+     * @return bool __FALSE__ if the query failed, __TRUE__ otherwise
+     */
     public function executeInsertOrUpdate(string $table, array $data, array $where = [])
     {
         $sql = "";
@@ -30,6 +33,9 @@ abstract class AbstractRepository extends DataBaseAccessObject
         return $this->executePrepared($sql, $data);
     }
 
+    /**
+     * @return false|array __FALSE__ if the query failed, array containing the result otherwhise.
+     */
     public function executeSelect(string $table, array $where, bool $findOne)
     {
         $sql = "SELECT * FROM $table";
@@ -42,6 +48,9 @@ abstract class AbstractRepository extends DataBaseAccessObject
         return $this->executePreparedSelect($sql, $where, $findOne);
     }
 
+    /**
+     * @return bool __FALSE__ if the query failed, __TRUE__ if the line could be deleted
+     */
     public function executeDelete(string $table, array $where)
     {
         $sql = "DELETE FROM $table";
@@ -52,6 +61,41 @@ abstract class AbstractRepository extends DataBaseAccessObject
         }
 
         return $this->executePrepared($sql, $where);
+    }
+
+    /**
+     * Executes a SELECT query written in plain SQL
+     * 
+     * @return false|array
+     */
+    public function executeSelectStatement($sql)
+    {
+        $pdo = $this->getPdo($this->getDbName());
+
+        $queryIsSelect = strcmp("SELECT", strtoupper(substr($sql, 0, 6))) == 0 ? true : false;
+
+        if ($pdo instanceof \PDO && $queryIsSelect) {
+            $statement = $pdo->prepare($sql);
+            if ($statement !== false) {
+
+                try {
+
+                    $execute = $statement->execute();
+
+                    if ($execute) {
+                        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                        return $result;
+                    }
+
+                    return [];
+                } catch (\Throwable $th) {
+                    return false;
+                }
+            }
+        }
+
+        return false;
     }
 
     private function getOrdainedColumns(array $array)

@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block tabtitle %}
-	Ma Compta
+	Liste des dossiers
 {% endblock %}
 
 {% block content %}
@@ -9,13 +9,13 @@
 	<div class="row row-cols-1 align-items-start gy-4">
 
 		<div class="col">
-			<a href="{{path('app_dossier_index')}}" class="btn btn-primary">Liste des dossiers</a>
+			<a href="{{path('app_home')}}" class="btn btn-primary">Liste des écritures</a>
 		</div>
 
 		<div class="col">
-			{% include 'home/_partials/ecritures_list.html.twig' %}
+			{% include 'dossier/_partials/dossiers_list.html.twig' %}
 		</div>
-		
+
 	</div>
 
 {% endblock %}
