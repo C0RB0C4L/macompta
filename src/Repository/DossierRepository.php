@@ -126,7 +126,7 @@ class DossierRepository extends AbstractRepository
     }
 
     /**
-     * Return an array of data with aditionnal properties, "credit, "debit", "balance"
+     * Return an array of data with aditionnal properties, "credit, "debit", "balance", "quantity"
      * The dossiers are sorted by creation date
      * 
      * @return array

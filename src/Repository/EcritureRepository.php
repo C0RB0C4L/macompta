@@ -125,4 +125,26 @@ class EcritureRepository extends AbstractRepository
 
         return $result;
     }
+
+    /**
+     * Returns an array with "credit_total", "debit_total", "grand_total"
+     * 
+     * @return array
+     */
+    public function selectTotals()
+    {
+        $sql = "SELECT DISTINCT " . "COALESCE((SELECT SUM(".self::TABLE_NAME.".".self::COLUMN_AMOUNT . ") FROM ".self::TABLE_NAME. " WHERE " . self::TABLE_NAME.".".self::COLUMN_TYPE . " = 'C'), 0) AS total_credit,"
+            . " COALESCE((SELECT SUM(".self::TABLE_NAME.".".self::COLUMN_AMOUNT . ") FROM ".self::TABLE_NAME. " WHERE " . self::TABLE_NAME.".".self::COLUMN_TYPE . " = 'D'), 0) AS total_debit,"
+            . " COALESCE((SELECT SUM(".self::TABLE_NAME.".".self::COLUMN_AMOUNT . ") FROM ".self::TABLE_NAME. " WHERE " . self::TABLE_NAME.".".self::COLUMN_TYPE . " = 'C'), 0)"
+            . " - COALESCE((SELECT SUM(".self::TABLE_NAME.".".self::COLUMN_AMOUNT . ") FROM ".self::TABLE_NAME. " WHERE " . self::TABLE_NAME.".".self::COLUMN_TYPE . " = 'D'), 0) AS grand_total"
+            . " FROM " . self::TABLE_NAME;
+
+        $result = $this->executeSelectStatement($sql);
+
+        if(!empty($result)) {
+            return $result[0];
+        }
+
+        return $result;
+    }
 }

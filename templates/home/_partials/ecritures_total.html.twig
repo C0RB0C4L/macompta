@@ -1,0 +1,31 @@
+<div class="card bg-dark border border-0 rounded-3 shadow-sm text-white-50 h-100 ">
+
+	<div class="card-body d-flex flex-column justify-content-between">
+
+		<table class="table table-responsive table-sm text-white">
+			<thead>
+				<th>Total des crédits</th>
+				<th>Date des débits</th>
+				<th>Total global</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						{{ecritures_total.total_credit|number_format(2, '.', '')}}
+					</td>
+					<td>
+						{{ecritures_total.total_debit|number_format(2, '.', '')}}
+					</td>
+					<td>
+						{% if ecritures_total.grand_total != 0 %}
+							<span class="text-danger">
+								{{ecritures_total.grand_total|number_format(2, '.', '')}}
+							</span>
+						{% else %}
+							{{ecritures_total.grand_total|number_format(2, '.', '')}}
+						{% endif %}
+
+					</td>
+				</tr>
+			</tbody>
+		</table>

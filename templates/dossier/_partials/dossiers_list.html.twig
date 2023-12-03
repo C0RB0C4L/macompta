@@ -30,9 +30,9 @@
 						<td>{{dossier.uuid}}</td>
 						<td>{{dossier.login}}</td>
 						<td>{{dossier.quantity}}</td>
-						<td>{{dossier.credit}}</td>
-						<td>{{dossier.debit}}</td>
-						<td>{{dossier.balance}}</td>
+						<td>{{dossier.credit|number_format(2, '.', '')}}</td>
+						<td>{{dossier.debit|number_format(2, '.', '')}}</td>
+						<td>{{dossier.balance|number_format(2, '.', '')}}</td>
 						<td>
 							{{dossier.created_at|date("Y-m-d")}}
 						</td>

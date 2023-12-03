@@ -26,7 +26,7 @@
 						</td>
 						<td>{{ecriture.date}}</td>
 						<td>{{ecriture.type}}</td>
-						<td>{{ecriture.amount}}</td>
+						<td>{{ecriture.amount|number_format(2, '.', '')}}</td>
 						<td>
 							<button class="btn btn-info btn-sm" data-form-fetch="{{path('app_ecriture_edit_ajax', {uuid:ecriture.uuid})}}" title="Editer" data-bs-target="#modalEditEcriture" data-bs-toggle="modal">
 								<i class="bi bi-pencil"></i>

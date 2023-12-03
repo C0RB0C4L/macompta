@@ -14,9 +14,11 @@ class HomeController extends AbstractController
     public function home(EcritureRepository $repo): Response
     {
         $ecritures = $repo->selectAllEcritures();
+        $ecrituresTotal = $repo->selectTotals();
 
         return $this->render("home/index.html.twig", [
-            "ecritures" => $ecritures
+            "ecritures" => $ecritures,
+            "ecritures_total" => $ecrituresTotal
         ]);
     }
 }
